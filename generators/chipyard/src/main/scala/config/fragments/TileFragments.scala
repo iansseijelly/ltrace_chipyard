@@ -6,6 +6,7 @@ import org.chipsalliance.cde.config.{Field, Parameters, Config}
 import freechips.rocketchip.tile._
 import freechips.rocketchip.subsystem._
 import freechips.rocketchip.rocket.{RocketCoreParams, MulDivParams, DCacheParams, ICacheParams}
+import freechips.rocketchip.util.{TraceCoreParams, TraceEncoderParams}
 
 import cva6.{CVA6TileAttachParams}
 import sodor.common.{SodorTileAttachParams}
@@ -37,6 +38,22 @@ class WithTraceIO extends Config((site, here, up) => {
     case other => other
   }
   case TracePortKey => Some(TracePortParams())
+})
+
+class WithLTraceEncoder extends Config((site, here, up) => {
+  case TilesLocated(InSubsystem) => up(TilesLocated(InSubsystem), site) map {
+    case tp: RocketTileAttachParams => tp.copy(tileParams = tp.tileParams.copy(
+      ltrace = Some(new TraceEncoderParams(
+        coreParams = new TraceCoreParams(
+          nGroups = 1,
+          iretireWidth = 1,
+          xlen = tp.tileParams.core.xLen,
+          iaddrWidth = tp.tileParams.core.xLen
+        ),
+        bufferDepth = 16,
+        encoderBaseAddr = 0x10000000 + tp.tileParams.tileId * 0x1000
+      ))))
+  }
 })
 
 class WithNoTraceIO extends Config((site, here, up) => {
