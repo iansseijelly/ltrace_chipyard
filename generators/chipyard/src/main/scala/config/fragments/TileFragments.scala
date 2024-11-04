@@ -51,7 +51,7 @@ class WithLTraceEncoder extends Config((site, here, up) => {
           iaddrWidth = tp.tileParams.core.xLen
         ),
         bufferDepth = 16,
-        encoderBaseAddr = 0x10000000 + tp.tileParams.tileId * 0x1000
+        encoderBaseAddr = 0x3000000 + tp.tileParams.tileId * 0x1000
       ))))
   }
 })
