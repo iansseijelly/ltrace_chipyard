@@ -113,6 +113,7 @@ class FastRTLSimRocketConfig extends Config(
 
 class WithLTraceEncoderRocketConfig extends Config(
   new chipyard.config.WithLTraceEncoder ++
+  new chipyard.config.WithNPerfCounters(29) ++
   new freechips.rocketchip.subsystem.WithoutTLMonitors ++
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
