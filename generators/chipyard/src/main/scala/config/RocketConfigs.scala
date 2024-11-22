@@ -118,6 +118,12 @@ class WithLTraceEncoderRocketConfig extends Config(
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
 
+class WithLBRRocketConfig extends Config(
+  new chipyard.config.WithNLBR(8) ++
+  new freechips.rocketchip.subsystem.WithoutTLMonitors ++
+  new freechips.rocketchip.rocket.WithNHugeCores(1) ++
+  new chipyard.config.AbstractConfig)
+
 class SV48RocketConfig extends Config(
   new freechips.rocketchip.rocket.WithSV48 ++
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++

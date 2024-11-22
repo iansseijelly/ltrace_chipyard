@@ -81,6 +81,13 @@ class WithNPerfCounters(n: Int = 29) extends Config((site, here, up) => {
   }
 })
 
+class WithNLBR(n: Int = 8) extends Config((site, here, up) => {
+  case TilesLocated(InSubsystem) => up(TilesLocated(InSubsystem), site) map {
+    case tp: RocketTileAttachParams => tp.copy(tileParams = tp.tileParams.copy(core = tp.tileParams.core.copy(nLBR = n)))
+    case other => other
+  }
+})
+
 class WithNPMPs(n: Int = 8) extends Config((site, here, up) => {
   case TilesLocated(InSubsystem) => up(TilesLocated(InSubsystem), site) map {
     case tp: RocketTileAttachParams => tp.copy(tileParams = tp.tileParams.copy(
