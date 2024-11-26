@@ -157,7 +157,7 @@ lazy val chipyard = (project in file("generators/chipyard"))
   .dependsOn(testchipip, rocketchip, boom, rocketchip_blocks, rocketchip_inclusive_cache,
     dsptools, rocket_dsp_utils,
     gemmini, icenet, tracegen, cva6, nvdla, sodor, ibex, fft_generator,
-    constellation, mempress, barf, shuttle, caliptra_aes, rerocc,
+    constellation, mempress, barf, shuttle, caliptra_aes, rerocc, shell,
     compressacc, saturn, ara, firrtl2_bridge, vexiiriscv)
   .settings(libraryDependencies ++= rocketLibDeps.value)
   .settings(
@@ -273,6 +273,11 @@ lazy val tapeout = (project in file("./tools/tapeout/"))
   .settings(commonSettings)
   .settings(scalaVersion := "2.13.10") // stuck on chisel3 2.13.10
   .settings(libraryDependencies ++= Seq("com.typesafe.play" %% "play-json" % "2.9.2"))
+
+lazy val shell = (project in file("generators/shell"))
+  .dependsOn(rocketchip)
+  .settings(libraryDependencies ++= rocketLibDeps.value)
+  .settings(commonSettings)
 
 lazy val fixedpoint = freshProject("fixedpoint", file("./tools/fixedpoint"))
   .settings(chiselSettings)
@@ -408,3 +413,4 @@ lazy val firechip = (project in file("generators/firechip/chip"))
     Test / testOptions += Tests.Argument("-oF")
   )
   .settings(scalaTestSettings)
+

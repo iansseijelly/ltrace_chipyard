@@ -3,7 +3,7 @@ package chipyard
 import org.chipsalliance.cde.config.{Config}
 import freechips.rocketchip.prci.{AsynchronousCrossing}
 import freechips.rocketchip.subsystem.{InCluster}
-
+import shell._
 // --------------
 // Rocket Configs
 // --------------
@@ -123,6 +123,15 @@ class WithLBRRocketConfig extends Config(
   new freechips.rocketchip.subsystem.WithoutTLMonitors ++
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
+
+class WithGPIORocketConfig extends Config(
+  new chipyard.config.WithNLBR(8) ++
+  new shell.WithPeripheryGPIO ++
+  new chipyard.example.WithGCD(useAXI4 = true) ++
+  new freechips.rocketchip.subsystem.WithoutTLMonitors ++
+  new freechips.rocketchip.rocket.WithNHugeCores(1) ++
+  new chipyard.config.AbstractConfig
+)
 
 class SV48RocketConfig extends Config(
   new freechips.rocketchip.rocket.WithSV48 ++

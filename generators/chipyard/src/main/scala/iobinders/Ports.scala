@@ -54,6 +54,9 @@ case class BlockDevicePort (val getIO: () => ClockedIO[BlockDeviceIO], val param
 case class NICPort         (val getIO: () => ClockedIO[NICIOvonly], val params: NICConfig)
     extends Port[ClockedIO[NICIOvonly]]
 
+case class GPIOAXI4Port   (val getIO: () => Bool)
+    extends Port[Bool]
+
 case class AXI4MemPort     (val getIO: () => ClockedIO[AXI4Bundle], val params: MemoryPortParams, val edge: AXI4EdgeParameters, val clockFreqMHz: Int)
     extends Port[ClockedIO[AXI4Bundle]]
 

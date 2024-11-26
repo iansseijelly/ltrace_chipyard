@@ -6,6 +6,7 @@ import freechips.rocketchip.subsystem._
 import freechips.rocketchip.system._
 import org.chipsalliance.cde.config.Parameters
 import freechips.rocketchip.devices.tilelink._
+import shell._
 
 // ------------------------------------
 // BOOM and/or Rocket Top Level Systems
@@ -40,6 +41,7 @@ class DigitalTop(implicit p: Parameters) extends ChipyardSystem
   with fftgenerator.CanHavePeripheryFFT // Enables optionally having an MMIO-based FFT block
   with constellation.soc.CanHaveGlobalNoC // Support instantiating a global NoC interconnect
   with rerocc.CanHaveReRoCCTiles // Support tiles that instantiate rerocc-attached accelerators
+  with shell.CanHavePeripheryGPIO // Enables optionally adding the GPIO
 {
   override lazy val module = new DigitalTopModule(this)
 }

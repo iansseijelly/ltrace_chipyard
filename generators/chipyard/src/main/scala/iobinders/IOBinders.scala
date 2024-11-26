@@ -43,6 +43,8 @@ import chipyard.example.{CanHavePeripheryGCD}
 
 import scala.reflect.{ClassTag}
 
+import shell._
+
 object IOBinderTypes {
   type IOBinderTuple = (Seq[Port[_]], Seq[IOCell])
   type IOBinderFunction = (Boolean, => Any) => ModuleValue[IOBinderTuple]
@@ -563,4 +565,12 @@ class WithGCDBusyPunchthrough extends OverrideIOBinder({
     io_gcd_busy := busy
     (Seq(GCDBusyPort(() => io_gcd_busy)), Nil)
   }.getOrElse((Nil, Nil))
+})
+
+class WithGPIOAXI4Punchthrough extends OverrideIOBinder({
+  (system: CanHavePeripheryGPIO) => system.gpio_top.map({ p =>
+    val gpio = IO(Output(Bool())).suggestName("gpio_top_pin")
+    gpio := p
+    (Seq(GPIOAXI4Port(() => gpio)), Nil)
+  }).getOrElse((Nil, Nil))
 })
