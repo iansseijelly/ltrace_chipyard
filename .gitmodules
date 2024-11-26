@@ -154,3 +154,6 @@
 [submodule "generators/vexiiriscv"]
 	path = generators/vexiiriscv
 	url = https://github.com/ucb-bar/vexiiriscv-tile.git
+[submodule "generators/shell"]
+	path = generators/shell
+	url = git@github.com:iansseijelly/shell.git
