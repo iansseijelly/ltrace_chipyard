@@ -42,6 +42,7 @@ class WithArty100TTweaks(freqMHz: Double = 50) extends Config(
 
 class RocketArty100TConfig extends Config(
   new WithArty100TTweaks ++
+  new chipyard.config.WithNLBR(8) ++
   new chipyard.config.WithBroadcastManager ++ // no l2
   new chipyard.RocketConfig)
 
