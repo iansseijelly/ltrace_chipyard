@@ -125,6 +125,7 @@ class WithLBRRocketConfig extends Config(
   new chipyard.config.AbstractConfig)
 
 class WithGPIORocketConfig extends Config(
+  new chipyard.harness.WithGPIOAXI4Harness ++
   new chipyard.config.WithNLBR(8) ++
   new shell.WithPeripheryGPIO ++
   new chipyard.example.WithGCD(useAXI4 = true) ++

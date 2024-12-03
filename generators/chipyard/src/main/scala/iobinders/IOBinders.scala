@@ -51,6 +51,8 @@ object IOBinderTypes {
 }
 import IOBinderTypes._
 
+import shell._
+
 // System for instantiating binders based
 // on the scala type of the Target (_not_ its IO). This avoids needing to
 // duplicate harnesses (essentially test harnesses) for each target.
@@ -569,8 +571,8 @@ class WithGCDBusyPunchthrough extends OverrideIOBinder({
 
 class WithGPIOAXI4Punchthrough extends OverrideIOBinder({
   (system: CanHavePeripheryGPIO) => system.gpio_top.map({ p =>
-    val gpio = IO(Output(Bool())).suggestName("gpio_top_pin")
-    gpio := p
+    val gpio = IO(new AXI_TOP_IO()).suggestName("gpio_top_pin")
+    gpio <> p
     (Seq(GPIOAXI4Port(() => gpio)), Nil)
   }).getOrElse((Nil, Nil))
 })

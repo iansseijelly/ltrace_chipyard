@@ -18,6 +18,7 @@ import freechips.rocketchip.subsystem.{MemoryPortParams, MasterPortParams, Slave
 import freechips.rocketchip.devices.debug.{ClockedDMIIO}
 import freechips.rocketchip.tilelink.{TLBundle}
 import org.chipsalliance.diplomacy.nodes.{HeterogeneousBag}
+import shell._
 
 trait Port[T <: Data] {
   val getIO: () => T
@@ -54,8 +55,8 @@ case class BlockDevicePort (val getIO: () => ClockedIO[BlockDeviceIO], val param
 case class NICPort         (val getIO: () => ClockedIO[NICIOvonly], val params: NICConfig)
     extends Port[ClockedIO[NICIOvonly]]
 
-case class GPIOAXI4Port   (val getIO: () => Bool)
-    extends Port[Bool]
+case class GPIOAXI4Port   (val getIO: () => AXI_TOP_IO)
+    extends Port[AXI_TOP_IO]
 
 case class AXI4MemPort     (val getIO: () => ClockedIO[AXI4Bundle], val params: MemoryPortParams, val edge: AXI4EdgeParameters, val clockFreqMHz: Int)
     extends Port[ClockedIO[AXI4Bundle]]
