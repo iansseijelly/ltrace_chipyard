@@ -124,13 +124,12 @@ class WithLBRRocketConfig extends Config(
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
 
-class WithGPIORocketConfig extends Config(
-  new chipyard.harness.WithGPIOAXI4Harness ++
+class WithPeripheralAXI4RocketConfig extends Config(
+  new chipyard.harness.WithPeripheralAXI4Harness ++
   new chipyard.config.WithNLBR(8) ++
-  new shell.WithPeripheryGPIO ++
-  new chipyard.example.WithGCD(useAXI4 = true) ++
+  new shell.WithPeripheralAXI4 ++
   new freechips.rocketchip.subsystem.WithoutTLMonitors ++
-  new freechips.rocketchip.rocket.WithNHugeCores(1) ++
+  new freechips.rocketchip.rocket.WithNSmallCores(1) ++
   new chipyard.config.AbstractConfig)
 
 class SV48RocketConfig extends Config(

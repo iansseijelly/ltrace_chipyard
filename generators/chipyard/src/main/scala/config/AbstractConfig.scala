@@ -62,6 +62,7 @@ class AbstractConfig extends Config(
   new chipyard.iobinders.WithGCDBusyPunchthrough ++
   new chipyard.iobinders.WithNMITiedOff ++
   new chipyard.iobinders.WithGPIOAXI4Punchthrough ++
+  new chipyard.iobinders.WithPeripheralAXI4Punchthrough ++
 
   // ================================================
   //   Set up External Memory and IO Devices

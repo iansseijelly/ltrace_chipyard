@@ -576,3 +576,11 @@ class WithGPIOAXI4Punchthrough extends OverrideIOBinder({
     (Seq(GPIOAXI4Port(() => gpio)), Nil)
   }).getOrElse((Nil, Nil))
 })
+
+class WithPeripheralAXI4Punchthrough extends OverrideIOBinder({
+  (system: CanHavePeripheralAXI4) => system.peripheral_top.map({ p =>
+    val periphery = IO(new AXI4()).suggestName("periph_axi4")
+    periphery <> p
+    (Seq(PeripheralAXI4Port(() => periphery)), Nil)
+  }).getOrElse((Nil, Nil))
+})
