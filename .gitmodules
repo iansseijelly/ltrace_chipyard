@@ -157,3 +157,6 @@
 [submodule "generators/shell"]
 	path = generators/shell
 	url = git@github.com:iansseijelly/shell.git
+[submodule "software/ltrace_decoder"]
+	path = software/ltrace_decoder
+	url = https://github.com/iansseijelly/ltrace_decoder.git
