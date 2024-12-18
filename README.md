@@ -6,7 +6,7 @@ Chengyi Lux Zhang, CS265 Final Project Report
 
 ## Abstract
 
-This project implements and systematically evaluates various different profile-guided optimization methodologies, and proposes a novel methodology.  
+This project implements and systematically evaluates various different profile-guided optimization methodologies, and proposes a novel methodology.
 Using core instruction trace, we can perform low-perturbation, high precision profile-guided optimization.
 
 ## Introduction
@@ -172,11 +172,11 @@ Instrumentation always counts this in its record as it is a global counter, and 
 Luckily, producing `afdo` format records is less challenging.
 AFDO parser, `create_gcov` supports a variety of profiler formats, including `perf` and `text`.
 Even though the native linux `perf` format is binary and difficult to produce, `text` is relatively easy.
-However, due to a completely vaccum in documentation for autofdo, this process also involves a lot of trials and errors.
+However, due to a lack of documentation for AutoFDO, this process also involves a lot of trials and errors.
 An afdo source txt file contains three sections: range, address, and branch.
 Range tracks a section of code executed sequentially without control flow changes.
 Then are generated as `{last_branch:dst-this_branch:src}`.
-Address does not seem to have any effect on the produced profile, so we also make it 0.
+Address does not seem to have any effect on the produced profile, so we always make it 0.
 Branch tracks each LBR record as-is.
 Then are generated as `{this_branch:src->this_branch:dst}`.
 The following code block demonstrates a generated record:
@@ -228,9 +228,9 @@ Nevertheless, this shows that using trace, we can generate high-quality profiles
 
 Both sample-afdo and trace-afdo produce code that does not significantly differ from the vannilla `-O1`.
 By turning on the `-fopt-info` command line option, we observe that certain passes under afdo are indeed in effect and attempted to optimze the code.
-In fact, afdo has decided to inline `blockswap`, a hot function, whereas traditional pgo decided not to, showing that they are just making different optimization decisions.
-Comparing the optimization between pgo and afdo, afdo makes much more conservative decisions. It performed significantly less loop unrollings, and it also performed less common store sinking.
-(Common store sinking can be improved with PGO after knowing loads and stores from previous loop iterations. `-fpredictive-commoning` is enabled by -O3, -fprofile-use, or -fauto-profile.)
+In fact, afdo has decided to inline `blockswap`, a hot function, whereas pgo did not, showing that they are just making different optimization decisions.
+Comparing the optimization between pgo and afdo, afdo makes much more conservative decisions. It performed less loop unrollings, and less common store sinking.
+*(Common store sinking can be improved with PGO after knowing loads and stores from previous loop iterations. `-fpredictive-commoning` is enabled by -O3, -fprofile-use, or -fauto-profile.)*
 
 It is yet a mystery why we are not getting much optimization from AutoFDO.
 In literature, AutoFDO claims to achieve an average of 85% of the gains of traditional PGO.[1]
@@ -240,7 +240,7 @@ Or maybe autofdo is no longer actively supported on gcc, and is only maintained 
 (We did notice that the default version number AutoFDO produced is `875575082` and GCC expects `2`.)
 We do not know yet, and correctly using AutoFDO in baremetal environment as a baseline comparison point is an ongoing effort.
 
-As an initial attempt to unravel this mystery, we plotted the effectiveness of PGO and AFDO under different optimization switches.
+As an initial attempt to unravel this mystery, we plotted the effectiveness of PGO and AFDO under different optimization levels.
 
 In the following diagram, we plot the effectiveness of turning on PGO under different gcc optimization levels.
 
