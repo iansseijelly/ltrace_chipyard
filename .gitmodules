@@ -96,7 +96,7 @@
 	url = https://github.com/riscv-software-src/riscv-pk.git
 [submodule "toolchains/riscv-tools/riscv-spike-devices"]
 	path = toolchains/riscv-tools/riscv-spike-devices
-	url = https://github.com/ucb-bar/spike-devices.git
+	url = https://github.com/iansseijelly/spike-devices.git
 [submodule "toolchains/riscv-tools/riscv-tests"]
 	path = toolchains/riscv-tools/riscv-tests
 	url = https://github.com/riscv-software-src/riscv-tests.git
