@@ -115,7 +115,7 @@ class WithLTraceEncoderRocketConfig extends Config(
   new chipyard.harness.WithPeripheralAXI4Harness ++
   new chipyard.config.WithLTraceEncoder ++
   new chipyard.config.WithNPerfCounters(29) ++
-  new chipyard.config.WithNLBR(8) ++
+  // new chipyard.config.WithNLBR(8) ++
   new freechips.rocketchip.subsystem.WithoutTLMonitors ++
   new shell.WithPeripheralAXI4 ++
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
