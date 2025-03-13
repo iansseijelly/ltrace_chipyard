@@ -15,7 +15,7 @@ import vexiiriscv.{VexiiRiscvTileAttachParams}
 import testchipip.cosim.{TracePortKey, TracePortParams}
 import barf.{TilePrefetchingMasterPortParams}
 import freechips.rocketchip.trace.{TraceEncoderParams, TraceCoreParams}
-import tacit.{TacitEncoder}
+import tacit.{TacitEncoder, TacitBPParams}
 import shuttle.common.{ShuttleTileAttachParams}
 class WithL2TLBs(entries: Int) extends Config((site, here, up) => {
   case TilesLocated(InSubsystem) => up(TilesLocated(InSubsystem), site) map {
@@ -78,8 +78,9 @@ class WithTacitEncoder extends Config((site, here, up) => {
           xlen = tp.tileParams.core.xLen,
           iaddrWidth = tp.tileParams.core.xLen
         ), 
-        bufferDepth = 16,
-        coreStages = 5)(p)),
+        bufferDepth = 16, 
+        coreStages = 5, 
+        bpParams = TacitBPParams(xlen = tp.tileParams.core.xLen, n_entries = 1024))(p)),
         useArbiterMonitor = false
       )),
       core = tp.tileParams.core.copy(enableTraceCoreIngress=true)))
@@ -90,7 +91,10 @@ class WithTacitEncoder extends Config((site, here, up) => {
           nGroups = tp.tileParams.core.retireWidth,
           xlen = tp.tileParams.core.xLen,
           iaddrWidth = tp.tileParams.core.xLen
-        ), bufferDepth = 16, coreStages = 7)(p)),
+        ), 
+        bufferDepth = 16, 
+        coreStages = 7, 
+        bpParams = TacitBPParams(xlen = tp.tileParams.core.xLen, n_entries = 1024))(p)),
         useArbiterMonitor = false
       )),
       core = tp.tileParams.core.copy(enableTraceCoreIngress=true)))

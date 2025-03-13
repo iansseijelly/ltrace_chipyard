@@ -124,5 +124,6 @@ class TacitRocketConfig extends Config(
   new chipyard.config.WithTacitEncoder ++
   new chipyard.config.WithNPerfCounters(29) ++
   new freechips.rocketchip.subsystem.WithoutTLMonitors ++
+  new freechips.rocketchip.subsystem.WithExtMemSbusBypass ++ // Add bypass path to access DRAM incoherently through an address alias
   new freechips.rocketchip.rocket.WithNHugeCores(1) ++
   new chipyard.config.AbstractConfig)
