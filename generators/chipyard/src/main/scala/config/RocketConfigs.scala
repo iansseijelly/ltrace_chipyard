@@ -118,7 +118,7 @@ class SV48RocketConfig extends Config(
 
 // Rocket with Tacit encoder and trace sinks
 class TacitRocketConfig extends Config(
-  new tacit.WithTraceSinkDMA(1) ++
+  // new tacit.WithTraceSinkDMA(1) ++
   new tacit.WithTraceSinkAlways(0) ++
   new chipyard.config.WithTraceArbiterMonitor ++
   new chipyard.config.WithTacitEncoder ++
